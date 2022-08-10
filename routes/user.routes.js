@@ -5,15 +5,18 @@ const {
   userPut,
   userDelete,
 } = require('../controllers/users.controllers');
+const { deleteRequestValidations } = require('../helpers/deleteValidate');
+const { postRequestValidations } = require('../helpers/postValidate');
+const { putRequestValidations } = require('../helpers/putValidate');
 
 const router = Router();
 
 router.get('/', userGet);
 
-router.post('/', userPost);
+router.post('/', postRequestValidations, userPost);
 
-router.put('/:id', userPut);
+router.put('/:id', putRequestValidations, userPut);
 
-router.delete('/', userDelete);
+router.delete('/:id', deleteRequestValidations, userDelete);
 
 module.exports = router;
